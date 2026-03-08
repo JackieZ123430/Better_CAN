@@ -1,3 +1,9 @@
+-- Protocol: Jackie_BMW_FSeries_Cluster
+-- Author: Jackie
+-- Version: 0.1.0
+-- Description: BeamNG UDP protocol for BMW F-series instrument cluster over ESP32
+-- https://github.com/JackieZ123430/Better_CAN
+
 local M = {}
 
 local gameTime = 0
@@ -977,5 +983,6 @@ end
 
 
 M.onBeamBroke = onBeamBroke
+
 
 return M
