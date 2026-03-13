@@ -60,7 +60,7 @@ local function reset()
 end
 
 local function getAddress()
-  return "192.168.50.59"
+  return "192.168.50.59" --把这改成自己仪表的IP地址！！
 end
 
 local function getPort()
@@ -982,4 +982,5 @@ M.onBeamBroke = onBeamBroke
 
 
 return M
+
 
