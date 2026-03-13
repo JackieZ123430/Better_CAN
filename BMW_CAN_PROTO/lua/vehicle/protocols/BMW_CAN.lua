@@ -386,7 +386,6 @@ local function getStructDefinition()
     unsigned char  tireDefRL;
     unsigned char  tireDefRR;
 
-    -- 这里开始，必须和旧 BeamNGGame 完全一致
     float          throttleInput;
     float          brakeInput;
     float          engineLoad;
@@ -982,5 +981,6 @@ M.onBeamBroke = onBeamBroke
 
 
 return M
+
 
 
