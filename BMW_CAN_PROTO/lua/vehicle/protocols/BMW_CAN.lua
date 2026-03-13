@@ -190,7 +190,10 @@ end
 --   end
 local function onPhysicsStep(dt)
     accum = accum + dt
-    scanDamage()
+    if accum >= interval then
+        accum = 0
+        sendData()
+    end
 end
 
 local function isPhysicsStepUsed()
@@ -981,6 +984,7 @@ M.onBeamBroke = onBeamBroke
 
 
 return M
+
 
 
 
