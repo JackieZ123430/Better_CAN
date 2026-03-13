@@ -188,16 +188,9 @@ end
 --     log("I","BREAKGROUP","hood_supportBeams")
 --     log("I","DAMAGE","引擎盖损坏")
 --   end
--- end
-
 local function onPhysicsStep(dt)
     accum = accum + dt
-    scanDamage()   -- 实时扫描
-
-    if accum >= interval then
-        accum = 0
-        sendData()
-    end
+    scanDamage()
 end
 
 local function isPhysicsStepUsed()
@@ -411,8 +404,11 @@ local function fillStruct(o, dtSim)
   -- end
 
 
-  if not electrics or not electrics.values then return end
-
+  if not electrics or not electrics.values then
+    o.speedKmh = 0
+    o.rpm = 0
+    return
+  end
   local e = electrics.values
 
   -- time (ms)
@@ -602,40 +598,40 @@ o.airspeedKmh = (e.airspeed or 0) * 3.6
 -- Drive mode detection
 -- ===============================
 
-local mode = ""
+-- local mode = ""
 
 
 
-local dm = controller.getController("driveModes")
+-- local dm = controller.getController("driveModes")
 
-if dm and dm.getCurrentDriveModeKey then
-  local key = dm:getCurrentDriveModeKey()
-  if key then
-    mode = string.lower(tostring(key))
-  end
-end
+-- if dm and dm.getCurrentDriveModeKey then
+--   local key = dm:getCurrentDriveModeKey()
+--   if key then
+--     mode = string.lower(tostring(key))
+--   end
+-- end
 
-if mode == "comfort" then
-  o.driveMode = 1
+-- if mode == "comfort" then
+--   o.driveMode = 1
 
-elseif mode == "sport" or mode == "ttsport" or mode == "race" then
-  o.driveMode = 2
+-- elseif mode == "sport" or mode == "ttsport" or mode == "race" then
+--   o.driveMode = 2
 
-elseif mode == "sport+" or mode == "race+" or mode == "ttsport+" then
-  o.driveMode = 3
+-- elseif mode == "sport+" or mode == "race+" or mode == "ttsport+" then
+--   o.driveMode = 3
 
-elseif mode == "off" then
-  o.driveMode = 4
+-- elseif mode == "off" then
+--   o.driveMode = 4
 
-elseif mode == "2WD" or mode == "2wd" then
-  o.driveMode = 5
+-- elseif mode == "2WD" or mode == "2wd" then
+--   o.driveMode = 5
 
-elseif mode == "drift" then
-  o.driveMode = 6
+-- elseif mode == "drift" then
+--   o.driveMode = 6
 
-else
-  o.driveMode = 0
-end
+-- else
+--   o.driveMode = 0
+-- end
 
 -- print("BeamNG driveMode =", o.driveMode)
 
@@ -986,3 +982,4 @@ M.onBeamBroke = onBeamBroke
 
 
 return M
+
