@@ -35,6 +35,14 @@ local damageState = {
 
 
 local function init()
+    log("I","BMW_PROTO","Jackie BMW Cluster Protocol v1 loaded")
+    log("I","BMW_PROTO","Jackie BMW Cluster Protocol v1 loaded")
+    log("I","BMW_PROTO","Jackie BMW Cluster Protocol v1 loaded")
+    log("I","BMW_PROTO","Jackie BMW Cluster Protocol v1 loaded")
+    log("I","BMW_PROTO","Jackie BMW Cluster Protocol v1 loaded")
+    log("I","BMW_PROTO","Jackie BMW Cluster Protocol v1 loaded")
+    log("I","BMW_PROTO","Jackie BMW Cluster Protocol v1 loaded")
+
 end
 
 local function reset()
@@ -414,10 +422,11 @@ local function fillStruct(o, dtSim)
   local e = electrics.values
 
   -- time (ms)
-  gameTime = gameTime + dtSim
+  -- gameTime = gameTime + dtSim
+  -- debugTimer = debugTimer + dtSim
+  -- o.time = math.floor(gameTime * 1000)
   debugTimer = debugTimer + dtSim
-  o.time = math.floor(gameTime * 1000)
-
+  o.time = 0
   -- speed (km/h)
   o.speedKmh = (e.wheelspeed or 0) * 3.6
 
@@ -539,7 +548,7 @@ local sigL = e.signal_left_input or 0
 local sigR = e.signal_right_input or 0
 
 -- hazard overrides everything
-if (e.hazard ~= 0) then
+if e.hazard and (e.hazard ~= 0) then
   signalL_latched = 1
   signalR_latched = 1
 else
